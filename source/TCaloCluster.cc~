@@ -1,0 +1,7 @@
+#include "TCaloCluster.h"
+
+TCaloCluster::TCaloCluster()
+{
+
+}
+

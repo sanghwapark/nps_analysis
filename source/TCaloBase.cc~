@@ -1,0 +1,22 @@
+#include "TCaloBase.h"
+
+//____________________________________________________
+TCaloBase::TCaloBase()
+{
+  //Constructor
+  fInitGeometry = 0;
+}
+
+//____________________________________________________
+TCaloBase::~TCaloBase()
+{
+  // Destructor
+}
+
+//____________________________________________________
+void TCaloBase::Print()
+{
+  std::cout << "Geometry Initialization " << std::endl;
+}
+
+ClassImp(TCaloBase);

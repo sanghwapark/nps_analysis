@@ -1,0 +1,8 @@
+#include "TCaloGeometry.h"
+
+//_____________________________________________
+TCaloGeometry::TCaloGeometry()
+{
+
+}
+
