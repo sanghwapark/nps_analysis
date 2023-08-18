@@ -29,6 +29,8 @@ class TCaloBlock : public TCaloBase
   double GetZ() { return fZ; }
   //TClonesArray GetPos() { return fPos; }
 
+  ClassDef(TCaloBlock,1)
+
 };
 
 #endif // TCaloBlock_h

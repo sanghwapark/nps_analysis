@@ -30,6 +30,8 @@ class TCaloCluster : public TCaloBase
   double GetY() { return fY; }  
   double GetE() { return fEnergy; }  
 
+  ClassDef(TCaloCluster,1)
+
 };
 
 #endif /* TCaloCluster_h */

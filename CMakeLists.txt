@@ -20,7 +20,7 @@ INCLUDE(${ROOT_USE_FILE})
 INCLUDE_DIRECTORIES(${PROJ_DIR}/include)
 SET(SRC_DIR ${PROJ_DIR}/source)
 
-SET( CMAKE_CXX_FLAGS "-g -Wall -std=c++14 -fPIC -Wno-misleading-indentation" )
+SET( CMAKE_CXX_FLAGS "-g -Wall -fPIC -Wno-misleading-indentation" )
 
 ROOT_GENERATE_DICTIONARY(G__npsana TCaloBase.h TCaloBlock.h TCaloCluster.h TCaloGeometry.h TCaloCalibration.h TWaveform.h LINKDEF include/TCaloBaseLinkDef.h)
 

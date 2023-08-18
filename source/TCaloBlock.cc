@@ -20,3 +20,4 @@ TCaloBlock::~TCaloBlock()
 
 //__________________________________________
 
+ClassImp(TCaloBlock);
