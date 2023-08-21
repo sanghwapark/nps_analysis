@@ -13,14 +13,19 @@ class TCaloBlock : public TCaloBase
   double fY;               // block y-pos
   double fZ;
 
+  double fiX;              // x, y index
+  double fiY;              // increases from left to right, bottom to top
+  
  public:
   TCaloBlock();
+  TCaloBlock(int blockid, double x, double y, double z);
   virtual ~TCaloBlock();
   //add copy
   
   void SetBlockEnergy(double benergy) { fBlockEnergy = benergy; }
   void SetBlockTime(double btime){ fBlockTime = btime; }
   void SetBlockID(int bid) { fBlockID = bid; }
+  void SetBlockPos(double x, double y, double z) { fX = x; fY = y; fZ = z; }
   int GetBlockID() { return fBlockID; }
   double GetBlockEnergy() { return fBlockEnergy; }
   double GetBlockTime() { return fBlockTime; }

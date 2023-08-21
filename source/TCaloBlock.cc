@@ -13,6 +13,18 @@ TCaloBlock::TCaloBlock()
 }
 
 //__________________________________________
+TCaloBlock::TCaloBlock(int blockid, double x, double y, double z)
+{
+  fBlockID = blockid;
+  fX = x;
+  fY = y;
+  fZ = z;
+
+  fBlockEnergy = -1;
+  fBlockTime = -1;
+}
+
+//__________________________________________
 TCaloBlock::~TCaloBlock()
 {
   // Destructor
