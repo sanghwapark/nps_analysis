@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #include "TCaloGeometry.h"
 
@@ -20,12 +21,14 @@ TCaloGeometry::TCaloGeometry()
   fYFront = 0;
   fZFront = 0;
 
+  fIsInitGeometry = 0;
+
   // Default geometry input file
   fCaloGeoFilename = "nps_geom.param";
 }
 
 //_____________________________________________
-void TCaloGeometry::GetGeometry()
+void TCaloGeometry::ReadGeometry()
 {
   string line;
   ifstream ifstr(fCaloGeoFilename.c_str());
@@ -37,23 +40,24 @@ void TCaloGeometry::GetGeometry()
 	  if(line.find(";") != string::npos)
 	    continue;
 
-	  //parse geo information
+	  // parse geo information
+	  // FIXME: use try..catch to handle exception
 	  if(line.find("nrows") != string::npos) {
-	    fNRow = stoi(line.substr(line.find("=")));
+	    fNRow = std::stoi(line.substr(line.find("=")+1));
 	  } else if(line.find("ncolumns") != string::npos) {
-	    fNCol = stoi(line.substr(line.find("=")));
+	    fNCol = std::stoi(line.substr(line.find("=")+1));
 	  } else if(line.find("front_x") != string::npos) {
-	    fXFront = stoi(line.substr(line.find("=")));
+	    fXFront = std::stoi(line.substr(line.find("=")+1));
 	  } else if(line.find("front_y") != string::npos) {
-	    fYFront = stoi(line.substr(line.find("=")));
+	    fYFront = std::stoi(line.substr(line.find("=")+1));
 	  } else if(line.find("front_z") != string::npos) {
-	    fZFront = stoi(line.substr(line.find("=")));
+	    fZFront = std::stoi(line.substr(line.find("=")+1));
 	  } else if(line.find("xstep") != string::npos) {
-	    fXStep = stoi(line.substr(line.find("=")));
+	    fXStep = std::stoi(line.substr(line.find("=")+1));
 	  } else if(line.find("ystep") != string::npos) {
-	    fYStep = stoi(line.substr(line.find("=")));
+	    fYStep = std::stoi(line.substr(line.find("=")+1));
 	  } else if(line.find("zstep") != string::npos) {
-	    fZStep = stoi(line.substr(line.find("=")));
+	    fZStep = std::stoi(line.substr(line.find("=")+1));
 	  } else {
 	    continue;
 	  }
@@ -69,9 +73,7 @@ void TCaloGeometry::GetGeometry()
 void TCaloGeometry::InitGeometry()
 {
   if(fNBlocks == 0)
-    GetGeometry();
-
-  std::map<int, std::pair<int,int>> m_XY;
+    ReadGeometry();
 
   // numbering scheme: left to right, bottom to top
   for(int i=0; i<fNRow; i++)
@@ -84,16 +86,9 @@ void TCaloGeometry::InitGeometry()
 	  double ypos = fYFront - (fNRow-1)*fYStep/2 + fYStep*i;
 	  double zpos = fZFront;
 
-	  mBlockXPos.push_back(xpos);
-	  mBlockYPos.push_back(ypos);
+	  m_BlockXPos.push_back(xpos);
+	  m_BlockYPos.push_back(ypos);
 
-	  // Define (ix,iy) index pair
-	  int iX = blockid%fNCol;
-	  int iY = blockid/fNCol;
-	  m_XY.insert(std::make_pair(blockid, std::make_pair(iX,iY)));
-
-	  auto block = new TCaloBlock(xpos, ypos, zpos);
-	  m_CaloBlocks.push_back(block);
 	}
     }
 
@@ -103,10 +98,8 @@ void TCaloGeometry::InitGeometry()
   for(auto& it : m_XY)
     {
       
-      
 
     }
-
 
   for(int id = 0; id<fNBlocks; id++)
     {
@@ -120,6 +113,5 @@ void TCaloGeometry::InitGeometry()
     }
   */
 
-
-
+  fIsInitGeometry = 1;
 }

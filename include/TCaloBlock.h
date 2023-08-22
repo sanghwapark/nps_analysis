@@ -13,9 +13,6 @@ class TCaloBlock : public TCaloBase
   double fY;               // block y-pos
   double fZ;
 
-  double fiX;              // x, y index
-  double fiY;              // increases from left to right, bottom to top
-  
  public:
   TCaloBlock();
   TCaloBlock(int blockid, double x, double y, double z);

@@ -1,0 +1,13 @@
+{
+
+  auto calo_geo = TCaloGeometry();
+  calo_geo.AddGeoParamFile("nps_geom.param");
+  calo_geo.InitGeometry();  
+
+  cout << calo_geo.GetNBlocks() << endl;
+  cout << calo_geo.GetNRow() << endl;
+  cout << calo_geo.GetNCol() << endl;
+
+
+
+}
